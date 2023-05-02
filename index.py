@@ -1,10 +1,11 @@
 import streamlit as st
 from gpt_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
 from langchain import OpenAI
-import openai
+import sys
+import os
 
 # API key
-openai.api_key = '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'
+os.environ["OPENAI_API_KEY"] = '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'
 
 # Trained data
 everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
