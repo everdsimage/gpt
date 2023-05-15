@@ -6,7 +6,7 @@ import sys
 import os
 
 # API key
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = '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'
 
 # Trained data
 #everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
