@@ -1,5 +1,5 @@
 import streamlit as st
-from gpt_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
+from llama_index import GPTSimpleVectorIndex
 from langchain import OpenAI
 import sys
 import os
