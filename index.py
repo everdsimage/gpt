@@ -23,9 +23,7 @@ def user_input_features():
     input = st.text_area('')
     if len(input) > 3:
         query_engine = everindex.as_query_engine()
-        response = query_engine.query('tomato flu')
-        print(str(response))
-        st.write(response)
+        response = query_engine.query(input)
         return response
 
 def main():
