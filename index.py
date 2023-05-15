@@ -19,6 +19,10 @@ st.text("""Medical Information""")
 
 st.text("")
 
+if "visibility" not in st.session_state:
+    st.session_state.visibility = "visible"
+    st.session_state.disabled = False
+    
 def user_input_features():
     input = st.text_input(
         "Enter some text 👇",
