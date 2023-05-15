@@ -1,6 +1,5 @@
 import streamlit as st
 from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
-from llama_index import GPTSimpleVectorIndex, download_loader
 #from gpt_index import GPTSimpleVectorIndex
 from langchain import OpenAI
 import sys
@@ -11,14 +10,8 @@ os.environ["OPENAI_API_KEY"] = 'sk-Rlvy2E3ivsbNM98czTzsT3BlbkFJ3crBD2XvBH8zaN5GT
 
 # Trained data
 #everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
-
-JsonDataReader = download_loader("JsonDataReader")
-loader = JsonDataReader()
-documents = loader.load_data('medical.json')
-everindex = GPTSimpleVectorIndex(documents)
-
-#documents = SimpleDirectoryReader('medical.json').load_data()
-#everindex = GPTVectorStoreIndex.from_documents(documents)
+documents = SimpleDirectoryReader('medical.json').load_data()
+everindex = GPTVectorStoreIndex.from_documents(documents)
 
 st.header("""Q&A""")
 
@@ -26,14 +19,15 @@ st.text("""Medical Information""")
 
 st.text("")
 
+
+query_engine = everindex.as_query_engine()
+response = query_engine.query('tomato flu')
+st.write(response)
+        
 def user_input_features():
     input = st.text_area('')
     if len(input) > 3:
         st.write(input)
-        #query_engine = everindex.as_query_engine()
-        #response = query_engine.query(input)
-        response = everindex.query(input)
-        st.write(response)
         return response
 
 def main():
