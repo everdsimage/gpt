@@ -22,7 +22,8 @@ st.text("")
 def user_input_features():
     input = st.text_area('')
     if input != '':
-        response = everindex.query(input)
+        query_engine = everindex.as_query_engine()
+        response = query_engine.query(input)
         return response
 
 def main():
