@@ -1,29 +1,26 @@
 import streamlit as st
-from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
-#from gpt_index import GPTSimpleVectorIndex
+from gpt_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
 from langchain import OpenAI
 import sys
 import os
 
 # API key
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = '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'
 
 # Trained data
-#everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
-documents = SimpleDirectoryReader('medical.json').load_data()
-everindex = GPTVectorStoreIndex.from_documents(documents)
+everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
+
 
 st.header("""Q&A""")
 
 st.text("""Medical Information""")
 
 st.text("")
-        
+
 def user_input_features():
     input = st.text_area('')
-    if len(input) > 3:
-        query_engine = everindex.as_query_engine()
-        response = query_engine.query(input)
+    if input != '':
+        response = everindex.query(input)
         return response
 
 def main():
