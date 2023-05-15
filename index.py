@@ -1,5 +1,7 @@
 import streamlit as st
-from gpt_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
+from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
+from llama_index import StorageContext, load_index_from_storage
+#from gpt_index import GPTSimpleVectorIndex
 from langchain import OpenAI
 import sys
 import os
@@ -8,19 +10,20 @@ import os
 os.environ["OPENAI_API_KEY"] = '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'
 
 # Trained data
-everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
-
+storage_context = StorageContext.from_defaults(persist_dir='Store')
+index = load_index_from_storage(storage_context)
 
 st.header("""Q&A""")
 
 st.text("""Medical Information""")
 
 st.text("")
-
+        
 def user_input_features():
     input = st.text_area('')
-    if input != '':
-        response = everindex.query(input)
+    if len(input) > 3:
+        query_engine = index.as_query_engine()
+        response = query_engine.query(input)
         return response
 
 def main():
