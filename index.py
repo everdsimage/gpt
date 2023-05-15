@@ -22,9 +22,9 @@ st.text("")
 def user_input_features():
     input = st.text_area('')
     if len(input) > 3:
-        st.write(input)
         query_engine = everindex.as_query_engine()
         response = query_engine.query(input)
+        st.write(response)
         return response
 
 def main():
