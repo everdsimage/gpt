@@ -20,8 +20,14 @@ st.text("""Medical Information""")
 st.text("")
 
 def user_input_features():
-    input = st.text_area(label_visibility='visible')
-    if input != '':
+    input = st.text_input(
+        "Enter some text 👇",
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+        placeholder=st.session_state.placeholder,
+    )
+    
+    if input:
         query_engine = everindex.as_query_engine()
         response = query_engine.query(input)
         return response
