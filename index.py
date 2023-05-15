@@ -1,5 +1,6 @@
 import streamlit as st
-from llama_index import GPTSimpleVectorIndex
+from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
+#from gpt_index import GPTSimpleVectorIndex
 from langchain import OpenAI
 import sys
 import os
@@ -8,8 +9,9 @@ import os
 os.environ["OPENAI_API_KEY"] = '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'
 
 # Trained data
-everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
-
+#everindex = GPTSimpleVectorIndex.load_from_disk('medical.json')
+documents = SimpleDirectoryReader('medical.json').load_data()
+everindex = GPTVectorStoreIndex.from_documents(documents)
 
 st.header("""Q&A""")
 
