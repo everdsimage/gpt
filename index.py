@@ -24,7 +24,7 @@ def user_input_features():
     if len(input) > 3:
         st.write(input)
         query_engine = everindex.as_query_engine()
-        response = query_engine.query(input)
+        response = query_engine.query('what is tomato flu')
         st.write(response)
         return response
 
