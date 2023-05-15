@@ -19,9 +19,9 @@ st.text("""Medical Information""")
 
 st.text("")
 
-
 query_engine = everindex.as_query_engine()
 response = query_engine.query('tomato flu')
+print(str(response))
 st.write(response)
         
 def user_input_features():
