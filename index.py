@@ -18,6 +18,10 @@ st.header("""Q&A""")
 st.text("""Medical Information""")
 
 st.text("")
+
+st.text("""Note: Tomoto flu only*""")
+
+st.text("")
         
 def user_input_features():
     input = st.text_area('')
